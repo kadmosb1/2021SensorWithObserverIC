@@ -1,0 +1,22 @@
+Op het startscherm staan 2 elementen:
+
+- Het label moet de waarde krijgen van de sensor -> We maken er een Observer van.
+- De button moet een kleur krijgen op basis van risicofactoren -> We maken er een Observer van.
+- Als de sensor van waarde verandert, moeten bovenstaande label/button veranderen -> We maken er een Observable van.
+
+Als je dat hebt gedaan, moeten de volgende stappen nog worden genomen:
+
+- De methode setTemperature moet worden aangepast:
+
+    - Als de temperatuur van de sensor verandert, dan moet dat met setChanged worden aangegeven (anders weet Java niet
+      dat de waarde is aangepast).
+    - Als de temperatuur van de sensor verandert, wordt dat met notifyObservers aan de geregistreerde Observers door
+      gegeven.
+
+- Om de wijziging vanuit de Observable door te kunnen voeren, moet voor elke Observable een methode update worden toegevoegd:
+
+    - In de methode update van de button wordt de kleur op basis van de doorgegeven temperatuur aangepast.
+    - In de methode update van het label wordt de tekst aangepast op basis van de doorgegeven temperatuur.
+
+- Als laatste moet aan beide Observers een regel worden toegevoegd in de Constructor (na de aanroep van de super-constructor):
+  sensor.addObserver (this).

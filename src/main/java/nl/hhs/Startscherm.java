@@ -40,7 +40,7 @@ public class Startscherm extends Application {
         rootPane.getChildren ().add (hBox);
 
         primaryStage.setScene (startScene);
-        primaryStage.setTitle ("Bowling lanes");
+        primaryStage.setTitle ("Observer");
         primaryStage.show ();
 
         Bounds bounds = rootPane.getBoundsInLocal();

@@ -2,12 +2,16 @@ package nl.hhs;
 
 import javafx.scene.control.Button;
 
-public class TemperatureButton extends Button {
+import java.util.Observable;
+import java.util.Observer;
+
+public class TemperatureButton extends Button implements Observer {
 
     Sensor sensor;
 
     public TemperatureButton (Sensor sensor) {
         super ();
+        sensor.addObserver (this);
         setColor (sensor.getTemperature ());
     }
 
@@ -25,5 +29,10 @@ public class TemperatureButton extends Button {
         else {
             setStyle ("-fx-base: blue;");
         }
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        setColor ((Integer) arg);
     }
 }
