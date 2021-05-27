@@ -1,20 +1,31 @@
 package nl.hhs;
 
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+
+class EventHandlerClose implements EventHandler<WindowEvent> {
+
+    Sensor sensor;
+    TemperatureButton button;
+    TemperatureLabel label;
+
+    public EventHandlerClose (Sensor sensor, TemperatureButton button, TemperatureLabel label) {
+        this.sensor = sensor;
+        this.button = button;
+        this.label = label;
+    }
+
+    @Override
+    public void handle (WindowEvent windowEvent) {
+    }
+}
 
 public class StatusScreen extends Stage {
 
@@ -45,10 +56,7 @@ public class StatusScreen extends Stage {
         hBox.getChildren ().add (button);
         HBox.setMargin (button, new Insets (0, 10, 0, 0));
 
-        setOnCloseRequest(windowEvent -> {
-            sensor.deleteObserver (label);
-            sensor.deleteObserver (button);
-        });
+        setOnCloseRequest (new EventHandlerClose (sensor, button, label));
 
         rootPane.getChildren ().add (hBox);
 
