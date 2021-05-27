@@ -24,6 +24,8 @@ class EventHandlerClose implements EventHandler<WindowEvent> {
 
     @Override
     public void handle (WindowEvent windowEvent) {
+        sensor.deleteObserver (button);
+        sensor.deleteObserver (label);
     }
 }
 
