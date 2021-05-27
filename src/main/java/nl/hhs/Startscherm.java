@@ -86,7 +86,7 @@ public class Startscherm extends Application {
         buttonNewStatus.setPrefWidth (200);
         buttonNewStatus.setAlignment (Pos.CENTER);
         buttonNewStatus.setOnAction (actionEvent -> {
-            new StatusScreen(xNextStatusScreen, yNextStatusScreen, sensor.getTemperature ());
+            new StatusScreen(xNextStatusScreen, yNextStatusScreen, sensor);
             xNextStatusScreen -= 250;
         });
         vBoxTotaal.getChildren ().add (buttonNewStatus);

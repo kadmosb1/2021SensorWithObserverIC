@@ -2,14 +2,23 @@ package nl.hhs;
 
 import javafx.scene.control.Label;
 
-public class TemperatureLabel extends Label {
+import java.util.Observable;
+import java.util.Observer;
 
-    public TemperatureLabel (int temperature) {
+public class TemperatureLabel extends Label implements Observer {
+
+    public TemperatureLabel (Sensor sensor) {
         super ();
-        setText (temperature);
+        setText (sensor.getTemperature ());
+        sensor.addObserver (this);
     }
 
     public void setText (int temperature) {
         setText (" " + temperature + " *C");
+    }
+
+    @Override
+    public void update (Observable o, Object arg) {
+        setText ((int) arg);
     }
 }

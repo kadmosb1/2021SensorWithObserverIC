@@ -18,7 +18,7 @@ import javafx.stage.WindowEvent;
 
 public class StatusScreen extends Stage {
 
-    public StatusScreen(int x, int y, int temperature) {
+    public StatusScreen(int x, int y, Sensor sensor) {
 
         setResizable (false);
 
@@ -33,17 +33,22 @@ public class StatusScreen extends Stage {
         hBox.setPrefHeight (100);
         hBox.setAlignment (Pos.CENTER_LEFT);
 
-        TemperatureLabel label = new TemperatureLabel (temperature);
+        TemperatureLabel label = new TemperatureLabel (sensor);
         label.setFont (new Font ("Arial", 45));
-        label.setText (temperature);
+        label.setText (sensor.getTemperature ());
         label.setPrefWidth (150);
         hBox.getChildren ().add (label);
 
-        TemperatureButton button = new TemperatureButton (temperature);
+        TemperatureButton button = new TemperatureButton (sensor);
         button.setText ("Risk");
         button.setFont (new Font ("Arial", 20));
         hBox.getChildren ().add (button);
         HBox.setMargin (button, new Insets (0, 10, 0, 0));
+
+        setOnCloseRequest(windowEvent -> {
+            sensor.deleteObserver (label);
+            sensor.deleteObserver (button);
+        });
 
         rootPane.getChildren ().add (hBox);
 

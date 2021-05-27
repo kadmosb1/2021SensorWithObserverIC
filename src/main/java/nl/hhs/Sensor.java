@@ -1,6 +1,8 @@
 package nl.hhs;
 
-public class Sensor {
+import java.util.Observable;
+
+public class Sensor extends Observable {
 
     public Sensor () {
     }
@@ -9,6 +11,8 @@ public class Sensor {
 
     private void setTemperature (int temperature) {
         this.temperature = temperature;
+        setChanged ();
+        notifyObservers (temperature);
     }
 
     public void increaseTemperature () {
